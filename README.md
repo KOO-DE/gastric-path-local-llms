@@ -21,7 +21,7 @@ This repository contains the code for structured information extraction from gas
 - **LoRA fine-tuning**: ExpA (r=16) and ExpB (r=64) for Qwen2.5-7B, Gemma3-12B, Llama3.1-8B
     - ExpA = low-rank configuration (r=16, α=32, lr=2e-4)
     - ExpB = high-rank configuration (r=64, α=128, lr=1e-4)
-- **Comparison with rule-based system** based on hospital registry data
+- **Comparison with rule-based system** based on MySQL SQL queries
 - **Local deployment**: All models run on-premise without external API calls
 
 ---
@@ -52,29 +52,37 @@ This repository contains the code for structured information extraction from gas
 ## Repository Structure
 
 ```
-├── baseline/                   # Baseline LLM extraction
-│   ├── config_baseline.py      # Baseline prompt (Zero-shot / Few-shot / CoT)
-│   ├── config_ksp.py           # KSP guideline prompt
-│   ├── extract_main.py         # Main extraction script (vLLM)
-│   ├── utils.py                # Data loading and parsing utilities
-│   └── run_baseline.sh         # Automated experiment script
+├── baseline/                    # Baseline LLM extraction
+│   ├── config_baseline.py       # Baseline prompt (Zero-shot / Few-shot / CoT)
+│   ├── config_ksp.py            # KSP 2nd Edition guideline prompt
+│   ├── extract_main.py          # Main extraction script (vLLM)
+│   ├── utils.py                 # Data loading and parsing utilities
+│   └── run_baseline.sh          # Automated experiment script
 │
-├── finetune/                   # LoRA fine-tuning
-│   ├── config.py               # LoRA hyperparameters (ExpA / ExpB)
-│   ├── prepare_finetune_data.py# Train/val/test data preparation
-│   ├── train.py                # Fine-tuning main script
-│   ├── merge_adapter.py        # Merge LoRA adapter into base model
-│   ├── test_qwen.py            # Qwen inference (vLLM)
-│   ├── test_gemma.py           # Gemma3 inference (transformers)
-│   └── test_llama.py           # Llama inference (vLLM)
+├── finetune/                    # LoRA fine-tuning
+│   ├── config.py                # LoRA hyperparameters (ExpA / ExpB)
+│   ├── prepare_finetune_data.py # Train/val/test data preparation
+│   ├── train.py                 # Fine-tuning main script
+│   ├── merge_adapter.py         # Merge LoRA adapter into base model
+│   ├── test_qwen.py             # Qwen inference (vLLM)
+│   ├── test_gemma.py            # Gemma3 inference (transformers)
+│   └── test_llama.py            # Llama inference (vLLM)
 │
-├── rule_based/                 # Rule-based system
-│   └── convert_registry.py     # Convert hospital registry to evaluation format
+├── rule_based/                  # Rule-based extraction system
+│   ├── histologic_type.sql      # Histologic type
+│   ├── differentiation.sql      # Differentiation grade
+│   ├── lauren_type.sql          # Lauren classification
+│   ├── invasion.sql             # Lymphovascular / perineural invasion
+│   ├── lymph_node.sql           # Metastatic / harvested lymph node count
+│   ├── margin.sql               # Proximal / distal resection margin
+│   ├── tumor_site.sql           # Tumor location and circumference
+│   ├── tumor_size.sql           # Tumor size
+│   ├── staging.sql              # T/N/M stage and AJCC 8th overall stage
+│   └── README.md                # Rule-based system documentation
 │
-└── data/
-    ├── train.jsonl             # Training set (1,661 records)
-    ├── val.jsonl               # Validation set (237 records)
-    └── test.jsonl              # Test set (476 records)
+├── evaluation.py                # Evaluation script (four-quadrant null handling)
+├── metrics_ALL_configs.csv      # Aggregate performance metrics for all 40 configurations
+└── requirements.txt             # Python dependencies
 ```
 
 ---
@@ -155,6 +163,15 @@ python finetune/test_llama.py \
     --output_dir results
 ```
 
+### 3. Evaluation
+
+```bash
+python evaluation.py \
+    --pred results/llama_b_pred.csv \
+    --gold data/test.jsonl \
+    --output metrics/llama_b_metrics.csv
+```
+
 ---
 
 ## Main Results
@@ -188,7 +205,7 @@ python finetune/test_llama.py \
 
 - [Baseline Extraction README](baseline/README.md)
 - [Fine-tuning README](finetune/README.md)
-- [Rule-based System README](rule-based/README.md)
+- [Rule-based System README](rule_based/README.md)
 
 ---
 
