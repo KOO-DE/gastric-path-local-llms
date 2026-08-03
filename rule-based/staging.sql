@@ -103,7 +103,7 @@ WITH step1 AS (
                 SUBSTR(병리진단, INSTR(병리진단, 'Distant Metastasis (pM)')) AS pT_6,
                 SUBSTR(병리진단, INSTR(병리진단, 'Pathologic Staging (pTNM)')) AS pT_7,
                 SUBSTR(병리진단, INSTR(병리진단, 'Comment')) AS `Comment`
-            FROM pathologic_biopsy_03
+            FROM pathology_report
         ) biopsy
     ) biopsy
 )
