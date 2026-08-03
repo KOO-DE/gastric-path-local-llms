@@ -216,3 +216,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Data - never commit
+*.xlsx
+*.xls
+*.csv
+!metrics_ALL_configs.csv
+eval_raw_*
+data/
+results/
+*_results/
+
+# Model
+*.bin
+*.safetensors
+adapter_*/
+checkpoints/
