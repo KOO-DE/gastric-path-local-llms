@@ -195,6 +195,6 @@ FROM(
                     병리진단, REGEXP_INSTR(병리진단, '[(][0-9]+[/][0-9]+.')
                 ), ')', 1
             ) AS Lymph_Node
-        FROM pathologic_biopsy_03
+        FROM pathology_report
     ) a
 ) a
