@@ -173,6 +173,6 @@ FROM(
                 THEN 'Anastomosis site'
                 ELSE 0
             END AS Anastomosis_Site
-        FROM pathologic_biopsy_04
+        FROM pathology_report
     ) a
 ) a
