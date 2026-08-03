@@ -294,7 +294,7 @@ FROM (
                             THEN 'VER2'
                             ELSE 'VER3'
                         END AS VER
-                    FROM pathologic_biopsy_03
+                    FROM pathology_report
                 ) biopsy
             ) biopsy
         ) biopsy
