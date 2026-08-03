@@ -121,7 +121,7 @@ FROM(
                     검사시행일,
                     병리진단,
                     SUBSTR(병리진단, INSTR(병리진단, 'size')) AS `Size`
-                FROM pathologic_biopsy_03
+                FROM pathology_report
             ) biopsy
         ) biopsy
     ) biopsy
