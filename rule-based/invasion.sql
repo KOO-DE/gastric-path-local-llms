@@ -71,7 +71,7 @@ FROM(
                     검사시행일,
                     SUBSTR(병리진단, INSTR(병리진단, 'lymphovascular invasion')) AS Lymphovascular_Invasion,
                     SUBSTR(병리진단, INSTR(병리진단, 'perineural invasion')) AS Perineural_Invasion
-                FROM pathologic_biopsy_03
+                FROM  pathology_report
             ) biopsy
         ) biopsy
     ) biopsy
