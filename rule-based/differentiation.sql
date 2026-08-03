@@ -254,7 +254,7 @@ FROM (
                             WHEN INSTR(병리진단, 'Differentiated') != 0
                             THEN SUBSTRING_INDEX(병리진단, 'Differentiated', 1)
                         END AS Differentiated
-                    FROM pathologic_biopsy_03
+                    FROM pathology_report
                 ) biopsy
             ) biopsy
         ) biopsy
