@@ -1,5 +1,5 @@
 SELECT
-    원무접수ID
+    원무접수ID,
     환자번호,
     검사시행일,
     Site_Num,
