@@ -1,6 +1,6 @@
 # Rule-Based versus LoRA Fine-Tuned Open-Source Large Language Models for Structured Extraction from Korean Gastric Cancer Pathology Reports
 
-> **Rule-Based versus LoRA Fine-Tuned Open-Source Large Language Models for Structured Extraction from Korean Gastric Cancer Pathology Reports**
+> **Official code for "Rule-Based versus LoRA Fine-Tuned Open-Source Large Language Models for Structured Extraction from Korean Gastric Cancer Pathology Reports"**
 >
 > Author information will be added upon publication.
 
